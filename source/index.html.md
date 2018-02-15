@@ -19,51 +19,52 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+[Companydata.co](https://www.companydata.co) is a platform to get all the data you need about companies. Check it out.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+The following documentation shows how to use the API to enrich your system with company data.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+We have language bindings in Shell (with `cURL`), Ruby and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
 > To authorize, use this code:
 
 ```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+TODO
 ```
 
 ```python
-import kittn
 
-api = kittn.authorize('meowmeowmeow')
+TODO
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -u your.email@domain.com:your_api_key "any_endpoint_here"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Make sure to replace `your.email@domain.com` with the email you used to register and `your_api_key` with your API key.
 
-let api = kittn.authorize('meowmeowmeow');
-```
+Companydata.co API uses an API key to allow access to the API. You will find your API key on your [account page](https://www.companydata.co/users/edit), once registered.
 
-> Make sure to replace `meowmeowmeow` with your API key.
+This is a basic authentication, so Companydata.co API expects for your email and the API key to be included in all API requests to the server in a header that looks like the following:
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+`Authorization: Basic GdtYWlsLmNvbTo4SHA5dk44MWZrOXFuaURGWU=`
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Where `GdtYWlsLmNvbTo4SHA5dk44MWZrOXFuaURGWU=` is the string `"your.email@domain.com:your_api_key"` encoded in base 64.
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>your.email@domain.com</code> with the email you used to register and <code>your_api_key</code> with your personal API key.
 </aside>
+
+# Pagination
+
+For endpoints that use pagination, you can use the parameter `page` to get a given page (the first page is 1, not 0). Default is `1`.
+
+You can also use the parameter `per_page` to tell how many items you want per page. Default is `10`.
+
+Pagination infos are returned in the response headers:
 
 # Kittens
 
