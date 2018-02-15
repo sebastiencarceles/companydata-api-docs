@@ -12,8 +12,7 @@ toc_footers:
   - <a href='https://github.com/lord/slate' target='_blank'>Documentation powered by Slate</a>
 
 includes:
-  - company
-  - financial_year
+  - resources
   - errors
 
 search: true
@@ -101,81 +100,11 @@ TODO
 
 > Replace `company` by any company name or partial company name you would like to search for.
 
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 3690840,
-    "name": "SARL MOLLAT",
-    "slug":"sarl-mollat",
-    "source_url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
-    "headquarter_in": "Paris",
-    "founded_in": "2001",
-    "legal_form": "Société à responsabilité limitée (sans autre indication)",
-    "staff": "9-10 employees",
-    "specialities": "Company specialities",
-    "presentation": "Company short presentation",
-    "logo_url": "http://logo.if/any.png",
-    "registration_1": "438036931",
-    "registration_2": "00014",
-    "activity_code": "6820A",
-    "activity": "Location de logements",
-    "address_line_1": "45 Rue d'Empradel",
-    "address_line_2": "",
-    "address_line_3": "",
-    "address_line_4": "",
-    "address_line_5": "",
-    "cedex": "",
-    "zipcode": "15700",
-    "city": "PLEAUX",
-    "department_code": "15",
-    "department": "Cantal",
-    "region": "Auvergne-Rhône-Alpes",
-    "founded_at": "2001-05-07",
-    "geolocation": "45.1496754,2.1292462",
-    "country": "France",
-    "quality": "headquarter",
-    "revenue": "De 5 millions à moins de 10 millions d'euros",
-    "smooth_name": "Sarl Mollat",
-    "financial_years": [
-      {
-        "year": "2015",
-        "currency": "€",
-        "revenue": 58758,
-        "income": 56820,
-        "staff": 10,
-        "duration": 12,
-        "closing_date": "2015-12-31",
-      },
-      {
-        "year": "2014",
-        "currency": "€",
-        "revenue": 63146,
-        "income": 11887,
-        "staff": 9,
-        "duration": 12,
-        "closing_date": "2014-12-31",
-      },
-      {
-        # Eventually more financial years here
-      }
-    ]
-  },
-  {
-    # Another company
-  },
-  {
-    # Yet another company
-  }
-]
-```
-
 This endpoint retrieves companies.
 
 ### HTTP Request
 
-`GET https://www.companydata.co/api/v1/companies`
+`GET https://www.companydata.co/api/v1/companies?q=`
 
 ### Query Parameters
 
@@ -187,109 +116,41 @@ per_page | 10 | Yes | The items count per page
 
 ### Response
 
-A list of items of kind [Company](#company). A `Company` may contain a list of [Financial years](#financial-year).
+A list of items of kind [Company](#resources).
 
-## Get a Specific Kitten
+## Get a specific company
 
 ```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
+TODO
 ```
 
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
+TODO
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl -u your.email@domain.com:your_api_key "https://www.companydata.co/api/v1/companies/identifier"
+
 ```
 
 ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+TODO
 ```
 
-> The above command returns JSON structured like this:
+> Replace `identifier` with any known identifier.
 
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint retrieves a specific company.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://www.companydata.co/api/v1/companies/<IDENTIFIER>`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Optional | Description
+--------- | -------- | -----------
+IDENTIFIER | No | The ID of the company to retreive. It can be an integer id, a `slug`, a `name` or a `smooth name`. Note that only the integer id and the `slug` are actually unique.
 
-## Delete a Specific Kitten
+### Response
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+An item of kind [Company](#resources).
