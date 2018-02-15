@@ -54,10 +54,8 @@
       "staff": 9,
       "duration": 12,
       "closing_date": "2014-12-31",
-    },
-    {
-      # Eventually more financial years here
     }
+    # Eventually more financial years here
   ]
 }
 ```
