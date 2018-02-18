@@ -266,8 +266,19 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code>
-<span class="no">TODO</span>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"any_endpoint_here"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
 </code></pre><pre class="highlight python tab-python"><code>
 <span class="n">TODO</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
@@ -307,13 +318,36 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 <li><code>X-Pagination-Last-Page</code>: <code>true</code> when it is the last page, <code>false</code> otherwise</li>
 <li><code>X-Pagination-Out-Of-Range</code>: <code>true</code> when the requested page is out of range, <code>false</code> otherwise</li>
 </ul>
-<h1 id='companies'>Companies</h1><h2 id='search-for-companies'>Search for companies</h2><pre class="highlight ruby tab-ruby"><code><span class="no">TODO</span>
+<h1 id='companies'>Companies</h1><h2 id='search-for-companies'>Search for companies</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="c1"># should be 200</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed results: array of hash</span>
+
+<span class="c1"># Pagination info:</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Limit-Value"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Total-Pages"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Current-Page"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Next-Page"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Prev-Page"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-First-Page"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Last-Page"</span><span class="p">]</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Out-Of-Range"</span><span class="p">]</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="n">TODO</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">TODO</span>
 </code></pre>
 <blockquote>
-<p>Replace <code>company</code> by any company name or partial company name you would like to search for.</p>
+<p>Replace <code>company</code> by any company name or partial company name you would like to search for.
+You will receive an array of hash, each hash representing a company.</p>
 </blockquote>
 
 <p>This endpoint retrieves companies.</p>
@@ -349,14 +383,27 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 </tbody></table>
 <h3 id='response'>Response</h3>
 <p>A list of items of kind <a href="#resources">Company</a>.</p>
-<h2 id='get-a-specific-company'>Get a specific company</h2><pre class="highlight ruby tab-ruby"><code><span class="no">TODO</span>
+<h2 id='get-a-specific-company'>Get a specific company</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies/sarl-mollat"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="c1"># should be 200</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed result: hash</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="n">TODO</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">TODO</span>
 </code></pre>
 <blockquote>
-<p>Replace <code>identifier</code> with any known identifier.</p>
+<p>Replace <code>identifier</code> with any known identifier.
+You will receive a hash representing a company.</p>
 </blockquote>
 
 <p>This endpoint retrieves a specific company.</p>
