@@ -276,11 +276,9 @@
 <span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span>
-<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code>
-<span class="n">TODO</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'any_endpoint_here'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl -u your.email@domain.com:your_api_key <span class="s2">"any_endpoint_here"</span>
 </code></pre>
@@ -341,7 +339,21 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 <span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-First-Page"</span><span class="p">]</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Last-Page"</span><span class="p">]</span>
 <span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Out-Of-Range"</span><span class="p">]</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">TODO</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies?q=mollat&amp;page=2&amp;per_page=5'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
+
+<span class="c"># Pagination info:</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Limit-Value'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Total-Pages'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Current-Page'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Next-Page'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Prev-Page'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-First-Page'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Last-Page'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Out-Of-Range'</span><span class="p">])</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">TODO</span>
 </code></pre>
@@ -396,7 +408,11 @@ You will receive an array of hash, each hash representing a company.</p>
 
 <span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="c1"># should be 200</span>
 <span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed result: hash</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="n">TODO</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/sarl-mollat'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">TODO</span>
