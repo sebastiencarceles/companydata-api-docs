@@ -29,7 +29,6 @@
   "department_code": "15",
   "department": "Cantal",
   "region": "Auvergne-Rhône-Alpes",
-  "founded_in": "2001",
   "founded_at": "2001-05-07",
   "geolocation": "45.1496754, 2.1292462",
   "country": "France",
@@ -90,7 +89,6 @@ city | string | Yes | City
 department_code | string | Yes | Department code
 department | string | Yes | Department
 region | string | Yes | Region
-founded_in | string | Yes | Year of creation
 founded_at | string | Yes | Date of creation
 geolocation | string | Yes | latitude, longitude
 country | string | Yes | Country
