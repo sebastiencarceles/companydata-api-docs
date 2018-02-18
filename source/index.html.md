@@ -31,8 +31,19 @@ We have language bindings in Shell (with `cURL`), Ruby and Python! You can view 
 > To authorize, use this code:
 
 ```ruby
+require "net/http"
+require "uri"
+require "json"
 
-TODO
+uri = URI.parse("any_endpoint_here")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+request.basic_auth("your.email@domain.com", "your_api_key")
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code
+puts JSON.parse(response.body)
 ```
 
 ```python
@@ -83,7 +94,29 @@ Pagination infos are returned in the response headers:
 ## Search for companies
 
 ```ruby
-TODO
+require "net/http"
+require "uri"
+require "json"
+
+uri = URI.parse("https://www.companydata.co/api/v1/companies?q=company")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+request.basic_auth("your.email@domain.com", "your_api_key")
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed results: array of hash
+
+# Pagination info:
+puts response["X-Pagination-Limit-Value"]
+puts response["X-Pagination-Total-Pages"]
+puts response["X-Pagination-Current-Page"]
+puts response["X-Pagination-Next-Page"]
+puts response["X-Pagination-Prev-Page"]
+puts response["X-Pagination-First-Page"]
+puts response["X-Pagination-Last-Page"]
+puts response["X-Pagination-Out-Of-Range"]
 ```
 
 ```python
@@ -99,6 +132,7 @@ TODO
 ```
 
 > Replace `company` by any company name or partial company name you would like to search for.
+> You will receive an array of hash, each hash representing a company.
 
 This endpoint retrieves companies.
 
@@ -121,7 +155,19 @@ A list of items of kind [Company](#resources).
 ## Get a specific company
 
 ```ruby
-TODO
+require "net/http"
+require "uri"
+require "json"
+
+uri = URI.parse("https://www.companydata.co/api/v1/companies/sarl-mollat")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+request.basic_auth("your.email@domain.com", "your_api_key")
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed result: hash
 ```
 
 ```python
@@ -138,6 +184,7 @@ TODO
 ```
 
 > Replace `identifier` with any known identifier.
+> You will receive a hash representing a company.
 
 This endpoint retrieves a specific company.
 
