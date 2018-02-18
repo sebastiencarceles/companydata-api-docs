@@ -41,14 +41,12 @@ request = Net::HTTP::Get.new(uri.request_uri)
 request.basic_auth("your.email@domain.com", "your_api_key")
 http.use_ssl = true
 response = http.request(request)
-
-puts response.code
-puts JSON.parse(response.body)
 ```
 
 ```python
+import requests
 
-TODO
+response = requests.get('any_endpoint_here', auth=('your.email@domain.com', 'your_api_key'))
 ```
 
 ```shell
@@ -120,7 +118,21 @@ puts response["X-Pagination-Out-Of-Range"]
 ```
 
 ```python
-TODO
+import requests
+
+response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
+print(response.status_code) # should be 200
+print(response.json()) # parsed results: array of hash
+
+# Pagination info:
+print(response.headers['X-Pagination-Limit-Value'])
+print(response.headers['X-Pagination-Total-Pages'])
+print(response.headers['X-Pagination-Current-Page'])
+print(response.headers['X-Pagination-Next-Page'])
+print(response.headers['X-Pagination-Prev-Page'])
+print(response.headers['X-Pagination-First-Page'])
+print(response.headers['X-Pagination-Last-Page'])
+print(response.headers['X-Pagination-Out-Of-Range'])
 ```
 
 ```shell
@@ -171,7 +183,11 @@ puts JSON.parse(response.body) # parsed result: hash
 ```
 
 ```python
-TODO
+import requests
+
+response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your.email@domain.com', 'your_api_key'))
+print(response.status_code) # should be 200
+print(response.json()) # parsed results: array of hash
 ```
 
 ```shell
