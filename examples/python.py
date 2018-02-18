@@ -1,4 +1,4 @@
-import requests
+import requests # with Python3
 
 response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
 print(response.status_code) # should be 200

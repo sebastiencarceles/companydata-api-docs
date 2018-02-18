@@ -24,7 +24,7 @@ search: true
 
 The following documentation shows how to use the API to enrich your system with company data.
 
-We have language bindings in Shell (with `cURL`), Ruby and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell (with `cURL`), Ruby and Python3 and Javascript (with Node.js)! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
@@ -44,7 +44,7 @@ response = http.request(request)
 ```
 
 ```python
-import requests
+import requests # with Python3
 
 response = requests.get('any_endpoint_here', auth=('your.email@domain.com', 'your_api_key'))
 ```
@@ -52,6 +52,14 @@ response = requests.get('any_endpoint_here', auth=('your.email@domain.com', 'you
 ```shell
 # With shell, you can just pass the correct header with each request
 curl -u your.email@domain.com:your_api_key "any_endpoint_here"
+```
+
+```javascript
+const request = require("request"); // npm install request
+
+var username = 'your.email@domain.com',
+    password = 'your_api_key',
+    url = 'https://' + username + ':' + password + '@any_endpoint_here';
 ```
 
 > Make sure to replace `your.email@domain.com` with the email you used to register and `your_api_key` with your API key.
@@ -118,7 +126,7 @@ puts response["X-Pagination-Out-Of-Range"]
 ```
 
 ```python
-import requests
+import requests # with Python3
 
 response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
 print(response.status_code) # should be 200
@@ -140,7 +148,26 @@ curl -u your.email@domain.com:your_api_key "https://www.companydata.co/api/v1/co
 ```
 
 ```javascript
-TODO
+const request = require("request"); // npm install request
+
+var username = 'your.email@domain.com',
+    password = 'your_api_key',
+    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5';
+
+request({url: url}, function (error, response, body) {
+  console.log(response.statusCode); // should be 200
+  console.log(JSON.parse(body)); // parsed results: array of hash
+
+  // Pagination infos:
+  console.log(response.headers['x-pagination-limit-value']);
+  console.log(response.headers['x-pagination-total-pages']);
+  console.log(response.headers['x-pagination-current-page']);
+  console.log(response.headers['x-pagination-next-page']);
+  console.log(response.headers['x-pagination-prev-page']);
+  console.log(response.headers['x-pagination-first-page']);
+  console.log(response.headers['x-pagination-last-page']);
+  console.log(response.headers['x-pagination-out-of-range']);
+});
 ```
 
 > Replace `company` by any company name or partial company name you would like to search for.
@@ -183,7 +210,7 @@ puts JSON.parse(response.body) # parsed result: hash
 ```
 
 ```python
-import requests
+import requests # with Python3
 
 response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your.email@domain.com', 'your_api_key'))
 print(response.status_code) # should be 200
@@ -196,7 +223,14 @@ curl -u your.email@domain.com:your_api_key "https://www.companydata.co/api/v1/co
 ```
 
 ```javascript
-TODO
+var username = 'your.email@domain.com',
+    password = 'your_api_key',
+    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/sarl-mollat';
+
+request({url: url}, function (error, response, body) {
+  console.log(response.statusCode); // should be 200
+  console.log(JSON.parse(body)); // parsed results: hash
+});
 ```
 
 > Replace `identifier` with any known identifier.
