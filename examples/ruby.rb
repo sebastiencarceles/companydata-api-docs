@@ -2,6 +2,8 @@ require "net/http"
 require "uri"
 require "json"
 
+## Companies
+
 uri = URI.parse("https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
@@ -22,6 +24,8 @@ puts response["X-Pagination-First-Page"]
 puts response["X-Pagination-Last-Page"]
 puts response["X-Pagination-Out-Of-Range"]
 
+# Company
+
 uri = URI.parse("https://www.companydata.co/api/v1/companies/sarl-mollat")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
@@ -32,3 +36,13 @@ response = http.request(request)
 puts response.code # should be 200
 puts JSON.parse(response.body) # parsed result: hash
 
+# Autocomplete
+
+uri = URI.parse("https://www.companydata.co/api/v1/companies/autocomplete?q=mollat")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed results: array of hash

@@ -128,7 +128,7 @@ puts response["X-Pagination-Out-Of-Range"]
 ```python
 import requests # with Python3
 
-response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
+response = requests.get('https://www.companydata.co/api/v1/companies?q=company&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
 print(response.status_code) # should be 200
 print(response.json()) # parsed results: array of hash
 
@@ -152,7 +152,7 @@ const request = require("request"); // npm install request
 
 var username = 'your.email@domain.com',
     password = 'your_api_key',
-    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5';
+    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies?q=company&page=2&per_page=5';
 
 request({url: url}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
@@ -171,13 +171,13 @@ request({url: url}, function (error, response, body) {
 ```
 
 > Replace `company` by any company name or partial company name you would like to search for.
-> You will receive an array of hash, each hash representing a company.
+> You will receive an array of hash, each hash representing a `Company`.
 
 This endpoint retrieves companies.
 
 ### HTTP Request
 
-`GET https://www.companydata.co/api/v1/companies?q=`
+`GET https://www.companydata.co/api/v1/companies?q=<COMPANY_NAME>`
 
 This endpoint is paginated and requires authentication.
 
@@ -200,7 +200,7 @@ require "net/http"
 require "uri"
 require "json"
 
-uri = URI.parse("https://www.companydata.co/api/v1/companies/sarl-mollat")
+uri = URI.parse("https://www.companydata.co/api/v1/companies/identifier")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
 request.basic_auth("your.email@domain.com", "your_api_key")
@@ -214,7 +214,7 @@ puts JSON.parse(response.body) # parsed result: hash
 ```python
 import requests # with Python3
 
-response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your.email@domain.com', 'your_api_key'))
+response = requests.get('https://www.companydata.co/api/v1/companies/identifier', auth=('your.email@domain.com', 'your_api_key'))
 print(response.status_code) # should be 200
 print(response.json()) # parsed results: array of hash
 ```
@@ -227,7 +227,7 @@ curl -u your.email@domain.com:your_api_key "https://www.companydata.co/api/v1/co
 ```javascript
 var username = 'your.email@domain.com',
     password = 'your_api_key',
-    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/sarl-mollat';
+    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/identifier';
 
 request({url: url}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
@@ -236,7 +236,7 @@ request({url: url}, function (error, response, body) {
 ```
 
 > Replace `identifier` with any known identifier.
-> You will receive a hash representing a company.
+> You will receive a hash representing a `Company`.
 
 This endpoint retrieves a specific company.
 
@@ -258,13 +258,52 @@ An item of kind [Company](#company).
 
 # Autocomplete
 
+```ruby
+require "net/http"
+require "uri"
+require "json"
+
+uri = URI.parse("https://www.companydata.co/api/v1/companies/autocomplete?q=company")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed results: array of hash
+```
+
+```python
+import requests # with Python3
+
+response = requests.get('https://www.companydata.co/api/v1/companies/autocomplete?q=company')
+print(response.status_code) # should be 200
+print(response.json()) # parsed results: array of hash
+```
+
+```shell
+curl "https://www.companydata.co/api/v1/companies/autocomplete?q=company"
+```
+
+```javascript
+const request = require("request"); // npm install request
+
+request({url: 'https://www.companydata.co/api/v1/companies/autocomplete?q=company'}, function (error, response, body) {
+  console.log(response.statusCode); // should be 200
+  console.log(JSON.parse(body)); // parsed results: hash
+});
+```
+
+> Replace `company` by any company name or partial company name you would like to search for.
+> You will receive an array of hash, each hash representing a `LightCompany`.
+
 A subpart of the API can be used **without authentication** to autocomplete API names, for example to create an autocomplete input field:
 
 ![autocomplete](images/autocomplete.gif)
 
 ### HTTP Request
 
-`GET https://www.companydata.co/api/v1/companies/autocomplete?q=`
+`GET https://www.companydata.co/api/v1/companies/autocomplete?q=<COMPANY_NAME>`
 
 This endpoint is not paginated and returns 10 items. It does not require authentication.
 
