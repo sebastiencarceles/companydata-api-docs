@@ -242,7 +242,29 @@
               </ul>
           </li>
           <li>
+            <a href="#autocomplete" class="toc-h1 toc-link" data-title="autocomplete">Autocomplete</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#http-request-3" class="toc-h2 toc-link" data-title="http-request">HTTP Request</a>
+                  </li>
+                  <li>
+                    <a href="#query-parameters-2" class="toc-h2 toc-link" data-title="query-parameters">Query Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#response-3" class="toc-h2 toc-link" data-title="response">Response</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#resources" class="toc-h1 toc-link" data-title="resources">Resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#company" class="toc-h2 toc-link" data-title="company">Company</a>
+                  </li>
+                  <li>
+                    <a href="#lightcompany" class="toc-h2 toc-link" data-title="lightcompany">LightCompany</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
@@ -389,6 +411,8 @@ You will receive an array of hash, each hash representing a company.</p>
 <p>This endpoint retrieves companies.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://www.companydata.co/api/v1/companies?q=</code></p>
+
+<p>This endpoint is paginated and requires authentication.</p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -456,6 +480,8 @@ You will receive a hash representing a company.</p>
 <p>This endpoint retrieves a specific company.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://www.companydata.co/api/v1/companies/&lt;IDENTIFIER&gt;</code></p>
+
+<p>This endpoint requires authentication.</p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -471,8 +497,34 @@ You will receive a hash representing a company.</p>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
-<p>An item of kind <a href="#resources">Company</a>.</p>
-<h1 id='resources'>Resources</h1>
+<p>An item of kind <a href="#company">Company</a>.</p>
+<h1 id='autocomplete'>Autocomplete</h1>
+<p>A subpart of the API can be used <strong>without authentication</strong> to autocomplete API names, for example to create an autocomplete input field:</p>
+
+<p><img src="images/autocomplete.gif" alt="autocomplete" /></p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://www.companydata.co/api/v1/companies/autocomplete?q=</code></p>
+
+<p>This endpoint is not paginated and returns 10 items. It does not require authentication.</p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>none</td>
+<td>No</td>
+<td>The search term</td>
+</tr>
+</tbody></table>
+<h3 id='response-3'>Response</h3>
+<p>A list of items of kind <a href="#lightcompany">LightCompany</a>.</p>
+<h1 id='resources'>Resources</h1><h2 id='company'>Company</h2>
 <blockquote>
 <p>A company is serialized like this:</p>
 </blockquote>
@@ -786,6 +838,73 @@ You will receive a hash representing a company.</p>
 <td>string</td>
 <td>No</td>
 <td>Closing date</td>
+</tr>
+</tbody></table>
+<h2 id='lightcompany'>LightCompany</h2>
+<blockquote>
+<p>A light company is serialized like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">3690840</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"smooth_name"</span><span class="p">:</span><span class="s2">"Sarl Mollat"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"SARL MOLLAT"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"PLEAUX"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"website_url"</span><span class="p">:</span><span class="s2">"https://www.companydata.co/companies/sarl-mollat"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"api_url"</span><span class="p">:</span><span class="s2">"https://www.companydata.co/api/v1/companies/sarl-mollat"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>A <code>LightCompany</code> has the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>No</td>
+<td>Unique ID</td>
+</tr>
+<tr>
+<td>smooth_name</td>
+<td>string</td>
+<td>No</td>
+<td>Smooth name (generated)</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>No</td>
+<td>Legal name</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Yes</td>
+<td>City</td>
+</tr>
+<tr>
+<td>country</td>
+<td>string</td>
+<td>Yes</td>
+<td>Country</td>
+</tr>
+<tr>
+<td>website_url</td>
+<td>string</td>
+<td>Yes</td>
+<td>URL to see the company details on the website</td>
+</tr>
+<tr>
+<td>api_url</td>
+<td>string</td>
+<td>Yes</td>
+<td>URL to use to access company details through the API</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
