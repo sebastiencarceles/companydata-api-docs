@@ -179,6 +179,8 @@ This endpoint retrieves companies.
 
 `GET https://www.companydata.co/api/v1/companies?q=`
 
+This endpoint is paginated and requires authentication.
+
 ### Query Parameters
 
 Parameter | Default | Optional | Description
@@ -242,6 +244,8 @@ This endpoint retrieves a specific company.
 
 `GET https://www.companydata.co/api/v1/companies/<IDENTIFIER>`
 
+This endpoint requires authentication.
+
 ### URL Parameters
 
 Parameter | Optional | Description
@@ -250,4 +254,28 @@ IDENTIFIER | No | The ID of the company to retreive. It can be an integer id, a 
 
 ### Response
 
-An item of kind [Company](#resources).
+An item of kind [Company](#company).
+
+# Autocomplete
+
+A subpart of the API can be used **without authentication** to autocomplete API names, for example to create an autocomplete input field:
+
+![autocomplete](images/autocomplete.gif)
+
+### HTTP Request
+
+`GET https://www.companydata.co/api/v1/companies/autocomplete?q=`
+
+This endpoint is not paginated and returns 10 items. It does not require authentication.
+
+### Query Parameters
+
+Parameter | Default | Optional | Description
+--------- | ------- | -------- | -----------
+q | none | No | The search term
+
+### Response
+
+A list of items of kind [LightCompany](#lightcompany).
+
+

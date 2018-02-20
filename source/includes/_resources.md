@@ -1,5 +1,7 @@
 # Resources
 
+## Company
+
 > A company is serialized like this:
 
 ```json
@@ -107,3 +109,31 @@ income | integer | No | Income
 staff | integer | No | Staff
 duration | integer | No | Duration in months
 closing_date | string | No | Closing date
+
+## LightCompany
+
+> A light company is serialized like this:
+
+```json
+{
+  "id":3690840,
+  "smooth_name":"Sarl Mollat",
+  "name":"SARL MOLLAT",
+  "city":"PLEAUX",
+  "country":"France",
+  "website_url":"https://www.companydata.co/companies/sarl-mollat",
+  "api_url":"https://www.companydata.co/api/v1/companies/sarl-mollat"
+}
+```
+
+A `LightCompany` has the following fields:
+
+Field | Type | Optional | Description
+----- | ---- | -------- | -----------
+id | integer | No | Unique ID
+smooth_name | string | No | Smooth name (generated)
+name | string | No | Legal name
+city | string | Yes | City
+country | string | Yes | Country
+website_url | string | Yes | URL to see the company details on the website
+api_url | string | Yes | URL to use to access company details through the API
