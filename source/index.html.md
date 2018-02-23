@@ -80,7 +80,7 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 
 For endpoints that use pagination, you can use the parameter `page` to get a given page (the first page is 1, not 0). Default is `1`.
 
-You can also use the parameter `per_page` to tell how many items you want per page. Default is `10`.
+You can also use the parameter `per_page` to tell how many items you want per page. Default is `10`. Max is `25`.
 
 Note that `page` and `per_page` are optional.
 
