@@ -122,7 +122,6 @@ name | string | No | Legal name
 slug | string | No | Unique name (generated)
 smooth_name | string | No | Smooth name (generated)
 source_url | string | Yes | Main data source
-headquarter_in | string | Yes | City where the headquarter is located
 legal_form | string | Yes | Legal form
 staff | string | Yes | Estimation of the employees count range
 specialities | string | Yes | Specialities
