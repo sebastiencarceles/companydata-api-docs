@@ -1,5 +1,13 @@
 # Resources
 
+A company has several representations, depending on the context:
+
+- When you need to autocomplete a company name, you receive a [`LightCompany`](#lightcompany), which contains only a few fields
+- When you perform a search, you receive a collection of [`Company`](#company), which contains the most important fields of a company
+- When you fetch a given company, you get a [`FullCompany`](#fullcompany), containing all the data we have about the company
+
+The `FullCompany` also comes with items of kind `FinancialYear`, giving more detailled data about the financial activity of the company.
+
 ## Company
 
 > A company is serialized like this:
@@ -9,8 +17,51 @@
   "id": 3690840,
   "name": "SARL MOLLAT",
   "slug":"sarl-mollat",
+  "legal_form": "Société à responsabilité limitée (sans autre indication)",
+  "staff": "9-10 employees",
+  "specialities": "Company specialities",
+  "presentation": "Company short presentation",
+  "logo_url": "http://logo.if/any.png",
+  "activity": "Location de logements",
+  "address": "45 Rue d'Empradel, 15700 PLEAUX",
+  "founded_at": "2001-05-07",
+  "country": "France",
+  "quality": "headquarter",
+  "revenue": "De 5 millions à moins de 10 millions d'euros",
+  "smooth_name": "Sarl Mollat"
+}
+```
+
+A `Company` has the following fields:
+
+Field | Type | Optional | Description
+----- | ---- | -------- | -----------
+id | integer | No | Unique ID
+name | string | No | Legal name
+slug | string | No | Unique name (generated)
+smooth_name | string | No | Smooth name (generated)
+legal_form | string | Yes | Legal form
+staff | string | Yes | Estimation of the employees count range
+specialities | string | Yes | Specialities
+presentation | string | Yes | Presentation
+logo_url | string | Yes | URL of the logo
+activity | string | Yes | Activity
+address | string | Yes | Address (address components joined with a coma)
+founded_at | string | Yes | Date of creation
+country | string | Yes | Country
+quality | string | Yes | "headquarter" or "branch"
+revenue | string | Yes | Estimation of the revenue
+
+## FullCompany
+
+> A full company is serialized like this:
+
+```json
+{
+  "id": 3690840,
+  "name": "SARL MOLLAT",
+  "slug":"sarl-mollat",
   "source_url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
-  "headquarter_in": "Pleaux",
   "legal_form": "Société à responsabilité limitée (sans autre indication)",
   "staff": "9-10 employees",
   "specialities": "Company specialities",
@@ -20,6 +71,7 @@
   "registration_2": "00014",
   "activity_code": "6820A",
   "activity": "Location de logements",
+  "address": "45 Rue d'Empradel, 15700 PLEAUX",
   "address_line_1": "45 Rue d'Empradel",
   "address_line_2": "",
   "address_line_3": "",
@@ -61,7 +113,7 @@
 }
 ```
 
-A `Company` has the following fields:
+A `FullCompany` has the following fields:
 
 Field | Type | Optional | Description
 ----- | ---- | -------- | -----------
@@ -81,6 +133,7 @@ registration_2 | string | Yes | Second registration number (in France: NIC)
 activity_code | string | Yes | Activity code (in France: APE)
 vat_number | string | Yes | VAT number (verified with https://ec.europa.eu)
 activity | string | Yes | Activity
+address | string | Yes | Address (address components joined with a coma)
 address_line_1 | string | Yes | Address first line
 address_line_2 | string | Yes | Address second line
 address_line_3 | string | Yes | Address third line

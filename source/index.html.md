@@ -191,7 +191,7 @@ per_page | 10 | Yes | The items count per page
 
 ### Response
 
-A list of items of kind [Company](#resources).
+A list of items of kind [Company](#company).
 
 ## Get a specific company
 
@@ -236,7 +236,7 @@ request({url: url}, function (error, response, body) {
 ```
 
 > Replace `identifier` with any known identifier.
-> You will receive a hash representing a `Company`.
+> You will receive a hash representing a `FullCompany`.
 
 This endpoint retrieves a specific company.
 
@@ -254,7 +254,7 @@ IDENTIFIER | No | The ID of the company to retreive. It can be an integer id, a 
 
 ### Response
 
-An item of kind [Company](#company).
+An item of kind [FullCompany](#fullcompany).
 
 # Autocomplete
 
@@ -316,5 +316,3 @@ q | none | No | The search term
 ### Response
 
 A list of items of kind [LightCompany](#lightcompany).
-
-
