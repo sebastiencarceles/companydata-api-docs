@@ -129,9 +129,9 @@ presentation | string | Yes | Presentation
 logo_url | string | Yes | URL of the logo
 registration_1 | string | Yes | First registration number (in France: SIREN)
 registration_2 | string | Yes | Second registration number (in France: NIC)
-activity_code | string | Yes | Activity code (in France: APE)
 vat_number | string | Yes | VAT number (verified with https://ec.europa.eu)
 activity | string | Yes | Activity
+activity_code | string | Yes | Activity code (in France: APE)
 address | string | Yes | Address (address components joined with a coma)
 address_line_1 | string | Yes | Address first line
 address_line_2 | string | Yes | Address second line
