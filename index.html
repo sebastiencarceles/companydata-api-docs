@@ -237,7 +237,10 @@
                     <a href="#search-for-companies" class="toc-h2 toc-link" data-title="search-for-companies">Search for companies</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-company" class="toc-h2 toc-link" data-title="get-a-specific-company">Get a specific company</a>
+                    <a href="#get-a-company" class="toc-h2 toc-link" data-title="get-a-company">Get a company</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-company-by-registration-numbers" class="toc-h2 toc-link" data-title="get-a-company-by-registration-numbers">Get a company by registration numbers</a>
                   </li>
               </ul>
           </li>
@@ -245,13 +248,13 @@
             <a href="#autocomplete" class="toc-h1 toc-link" data-title="autocomplete">Autocomplete</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#http-request-3" class="toc-h2 toc-link" data-title="http-request">HTTP Request</a>
+                    <a href="#http-request-4" class="toc-h2 toc-link" data-title="http-request">HTTP Request</a>
                   </li>
                   <li>
                     <a href="#query-parameters-2" class="toc-h2 toc-link" data-title="query-parameters">Query Parameters</a>
                   </li>
                   <li>
-                    <a href="#response-3" class="toc-h2 toc-link" data-title="response">Response</a>
+                    <a href="#response-4" class="toc-h2 toc-link" data-title="response">Response</a>
                   </li>
               </ul>
           </li>
@@ -446,7 +449,7 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 </tbody></table>
 <h3 id='response'>Response</h3>
 <p>A list of items of kind <a href="#company">Company</a>.</p>
-<h2 id='get-a-specific-company'>Get a specific company</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
+<h2 id='get-a-company'>Get a company</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
 <span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"json"</span>
 
@@ -496,10 +499,74 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 <tr>
 <td>IDENTIFIER</td>
 <td>No</td>
-<td>The ID of the company to retreive. It can be an integer id, a <code>slug</code>, a <code>name</code> or a <code>smooth name</code>. Note that only the integer id and the <code>slug</code> are actually unique.</td>
+<td>The ID of the company to retreive. It can be an integer <code>id</code>, a <code>slug</code>, a <code>registration number</code> (like the SIREN in France) or a <code>vat number</code>.</td>
 </tr>
 </tbody></table>
+
+<p>The <code>id</code>, the <code>slug</code> and <code>vat number</code>, are unique, so there is no doubt on the company you receive in return.</p>
+
+<p>If you prefer to use a <code>registration number</code> (like the SIREN in France), as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.</p>
 <h3 id='response-2'>Response</h3>
+<p>An item of kind <a href="#fullcompany">FullCompany</a>.</p>
+<h2 id='get-a-company-by-registration-numbers'>Get a company by registration numbers</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"json"</span>
+
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span><span class="p">)</span>
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">code</span> <span class="c1"># should be 200</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed result: hash</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'your.email@domain.com'</span><span class="p">,</span>
+    <span class="nx">password</span> <span class="o">=</span> <span class="s1">'your_api_key'</span><span class="p">,</span>
+    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://'</span> <span class="o">+</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">':'</span> <span class="o">+</span> <span class="nx">password</span> <span class="o">+</span> <span class="s1">'@www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">;</span>
+
+<span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span> <span class="c1">// parsed results: hash</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>Replace <code>registration_1</code> and <code>registration_2</code> with the known registration numbers of any company. In France, <code>registration_1</code> is the SIREN and <code>registration_2</code> is the NIC.
+You will receive a hash representing a <code>FullCompany</code>.</p>
+</blockquote>
+
+<p>This endpoint retrieves a specific company by it&#39;s registration numbers.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://www.companydata.co/api/v1/companies/&lt;REGISRATION_1&gt;/&lt;REGISRATION_2&gt;</code></p>
+
+<p>This endpoint requires authentication.</p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>REGISTRATION_1</td>
+<td>No</td>
+<td>The first registration number of the company (the SIREN in France)</td>
+</tr>
+<tr>
+<td>REGISTRATION_2</td>
+<td>No</td>
+<td>The second registration number of the company (the NIC in France)</td>
+</tr>
+</tbody></table>
+<h3 id='response-3'>Response</h3>
 <p>An item of kind <a href="#fullcompany">FullCompany</a>.</p>
 <h1 id='autocomplete'>Autocomplete</h1><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
 <span class="nb">require</span> <span class="s2">"uri"</span>
@@ -534,7 +601,7 @@ You will receive an array of hash, each hash representing a <code>LightCompany</
 <p>A subpart of the API can be used <strong>without authentication</strong> to autocomplete API names, for example to create an autocomplete input field:</p>
 
 <p><img src="images/autocomplete.gif" alt="autocomplete" /></p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://www.companydata.co/api/v1/companies/autocomplete?q=&lt;COMPANY_NAME&gt;</code></p>
 
 <p>This endpoint is not paginated and returns 10 items. It does not require authentication.</p>
@@ -554,7 +621,7 @@ You will receive an array of hash, each hash representing a <code>LightCompany</
 <td>The search term</td>
 </tr>
 </tbody></table>
-<h3 id='response-3'>Response</h3>
+<h3 id='response-4'>Response</h3>
 <p>A list of items of kind <a href="#lightcompany">LightCompany</a>.</p>
 <h1 id='resources'>Resources</h1>
 <p>A company has several representations, depending on the context:</p>
