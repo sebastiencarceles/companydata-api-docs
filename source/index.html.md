@@ -193,7 +193,7 @@ per_page | 10 | Yes | The items count per page
 
 A list of items of kind [Company](#company).
 
-## Get a specific company
+## Get a company
 
 ```ruby
 require "net/http"
@@ -250,7 +250,75 @@ This endpoint requires authentication.
 
 Parameter | Optional | Description
 --------- | -------- | -----------
-IDENTIFIER | No | The ID of the company to retreive. It can be an integer id, a `slug`, a `name` or a `smooth name`. Note that only the integer id and the `slug` are actually unique.
+IDENTIFIER | No | The ID of the company to retreive. It can be an integer `id`, a `slug`, a `registration number` (like the SIREN in France) or a `vat number`.
+
+The `id`, the `slug` and `vat number`, are unique, so there is no doubt on the company you receive in return.
+
+If you prefer to use a `registration number` (like the SIREN in France), as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.
+
+### Response
+
+An item of kind [FullCompany](#fullcompany).
+
+## Get a company by registration numbers
+
+```ruby
+require "net/http"
+require "uri"
+require "json"
+
+uri = URI.parse("https://www.companydata.co/api/v1/companies/registration_1/registration_2")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+request.basic_auth("your.email@domain.com", "your_api_key")
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed result: hash
+```
+
+```python
+import requests # with Python3
+
+response = requests.get('https://www.companydata.co/api/v1/companies/registration_1/registration_2', auth=('your.email@domain.com', 'your_api_key'))
+print(response.status_code) # should be 200
+print(response.json()) # parsed results: array of hash
+```
+
+```shell
+curl -u your.email@domain.com:your_api_key "https://www.companydata.co/api/v1/companies/registration_1/registration_2"
+
+```
+
+```javascript
+var username = 'your.email@domain.com',
+    password = 'your_api_key',
+    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/registration_1/registration_2';
+
+request({url: url}, function (error, response, body) {
+  console.log(response.statusCode); // should be 200
+  console.log(JSON.parse(body)); // parsed results: hash
+});
+```
+
+> Replace `registration_1` and `registration_2` with the known registration numbers of any company. In France, `registration_1` is the SIREN and `registration_2` is the NIC.
+> You will receive a hash representing a `FullCompany`.
+
+This endpoint retrieves a specific company by it's registration numbers.
+
+### HTTP Request
+
+`GET https://www.companydata.co/api/v1/companies/<REGISRATION_1>/<REGISRATION_2>`
+
+This endpoint requires authentication.
+
+### URL Parameters
+
+Parameter | Optional | Description
+--------- | -------- | -----------
+REGISTRATION_1 | No | The first registration number of the company (the SIREN in France)
+REGISTRATION_2 | No | The second registration number of the company (the NIC in France)
 
 ### Response
 
