@@ -186,6 +186,7 @@ This endpoint is paginated and requires authentication.
 Parameter | Default | Optional | Description
 --------- | ------- | -------- | -----------
 q | none | No | The search term
+quality | headquarter | Yes | The quality of the searched companies ; it can be `headquarter` (default), `branch` or `all`
 page | 1 | Yes | The wanted page
 per_page | 10 | Yes | The items count per page
 
