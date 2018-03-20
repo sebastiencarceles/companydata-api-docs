@@ -369,6 +369,8 @@ A subpart of the API can be used **without authentication** to autocomplete API 
 
 ![autocomplete](images/autocomplete.gif)
 
+For information, this endpoint only returns headquarters, not branches.
+
 ### HTTP Request
 
 `GET https://www.companydata.co/api/v1/companies/autocomplete?q=<COMPANY_NAME>`
