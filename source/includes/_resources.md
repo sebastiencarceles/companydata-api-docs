@@ -27,8 +27,11 @@ The `FullCompany` also comes with items of kind `FinancialYear`, giving more det
   "founded_at": "2001-05-07",
   "country": "France",
   "quality": "headquarter",
-  "revenue": "De 5 millions à moins de 10 millions d'euros",
-  "smooth_name": "Sarl Mollat"
+  "smooth_name": "Sarl Mollat",
+  "headquarter_id": 1776745,
+  "branch_ids": [
+      1776747
+  ]
 }
 ```
 
@@ -50,7 +53,8 @@ address | string | Yes | Address (address components joined with a coma)
 founded_at | string | Yes | Date of creation
 country | string | Yes | Country
 quality | string | Yes | "headquarter" or "branch"
-revenue | string | Yes | Estimation of the revenue
+headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
+branch_ids | array | No | Array containing the unique IDs of the branches if the company is a headquarter, or the other branches if the company is a branch
 
 ## FullCompany
 
@@ -89,6 +93,10 @@ revenue | string | Yes | Estimation of the revenue
   "quality": "headquarter",
   "revenue": "De 5 millions à moins de 10 millions d'euros",
   "smooth_name": "Sarl Mollat",
+  "headquarter_id": 1776745,
+  "branch_ids": [
+      1776747
+  ]
   "financial_years": [
     {
       "year": "2015",
@@ -149,6 +157,8 @@ geolocation | string | Yes | latitude, longitude
 country | string | Yes | Country
 quality | string | Yes | "headquarter" or "branch"
 revenue | string | Yes | Estimation of the revenue
+headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
+branch_ids | array | No | Array of the unique IDs of the branches if the company is a headquarter, or the other branches if the company is a branch
 financial_years | array | Yes | Items of kind `Financial year`
 
 A `Financial year` represents a year (more or less) of activity for a `Company`. It has the following fields:
