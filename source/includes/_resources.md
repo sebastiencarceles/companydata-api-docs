@@ -62,63 +62,69 @@ branch_ids | array | No | Array containing the unique IDs of the branches if th
 
 ```json
 {
-  "id": 3690840,
-  "name": "SARL MOLLAT",
-  "slug":"sarl-mollat",
-  "source_url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
-  "legal_form": "Société à responsabilité limitée (sans autre indication)",
-  "staff": "9-10 employees",
-  "specialities": "Company specialities",
-  "presentation": "Company short presentation",
-  "logo_url": "http://logo.if/any.png",
-  "registration_1": "438036931",
-  "registration_2": "00014",
-  "activity_code": "6820A",
-  "activity": "Location de logements",
-  "address": "45 Rue d'Empradel, 15700 PLEAUX",
-  "address_line_1": "45 Rue d'Empradel",
-  "address_line_2": "",
-  "address_line_3": "",
-  "address_line_4": "",
-  "address_line_5": "",
-  "cedex": "",
-  "zipcode": "15700",
-  "city": "PLEAUX",
-  "department_code": "15",
-  "department": "Cantal",
-  "region": "Auvergne-Rhône-Alpes",
-  "founded_at": "2001-05-07",
-  "geolocation": "45.1496754, 2.1292462",
-  "country": "France",
-  "quality": "headquarter",
-  "revenue": "De 5 millions à moins de 10 millions d'euros",
-  "smooth_name": "Sarl Mollat",
-  "headquarter_id": 1776745,
-  "branch_ids": [
-      1776747
-  ]
-  "financial_years": [
-    {
-      "year": "2015",
-      "currency": "€",
-      "revenue": 58758,
-      "income": 56820,
-      "staff": 10,
-      "duration": 12,
-      "closing_date": "2015-12-31",
-    },
-    {
-      "year": "2014",
-      "currency": "€",
-      "revenue": 63146,
-      "income": 11887,
-      "staff": 9,
-      "duration": 12,
-      "closing_date": "2014-12-31",
-    }
-    # Eventually more financial years here
-  ]
+    "id": 3690840,
+    "name": "SARL MOLLAT",
+    "smooth_name": "Sarl Mollat",
+    "slug": "sarl-mollat",
+    "legal_form": "Société à responsabilité limitée (sans autre indication)",
+    "staff": "0 salarié",
+    "presentation": "Mise à disposition d'appartements, de maisons ou d'emplacements pour caravanes vides ou meublés destinés à l'habitation principale ou secondaire.",
+    "logo_url": null,
+    "activity": "Location de logements",
+    "address": "SARL MOLLAT, RUE D EMPRADEL, 15700 PLEAUX",
+    "founded_at": "2001-05-07",
+    "country": "France",
+    "quality": "headquarter",
+    "revenue": "58758",
+    "source_url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
+    "registration_1": "438036931",
+    "registration_2": "00014",
+    "activity_code": "6820A",
+    "address_line_1": "SARL MOLLAT",
+    "address_line_2": "",
+    "address_line_3": "",
+    "address_line_4": "RUE D EMPRADEL",
+    "address_line_5": "",
+    "cedex": "",
+    "zipcode": "15700",
+    "city": "PLEAUX",
+    "department_code": "15",
+    "department": "Cantal",
+    "region": "Auvergne-Rhône-Alpes",
+    "geolocation": "45.131704,2.220223",
+    "vat_number": "FR58828022055",
+    "prefix": "Monsieur",
+    "first_name": "ALAIN",
+    "last_name": "THIERRY",
+    "email": "athierry@mollat.eu",
+    "phone": "02 03 22 33 12",
+    "headquarter_id": 1776745,
+    "branch_ids": [
+        1776747
+    ],
+    "financial_years": [
+        {
+            "year": "2016",
+            "currency": "€",
+            "revenue": null,
+            "income": null,
+            "staff": null,
+            "duration": 12,
+            "closing_date": "2016-12-31"
+        },
+        {
+            "year": "2015",
+            "currency": "€",
+            "revenue": 58758,
+            "income": 56820,
+            "staff": 0,
+            "duration": 12,
+            "closing_date": "2015-12-31"
+        },
+        # Eventually more financial years here
+    ]
 }
+
 ```
 
 A `FullCompany` has the following fields:
@@ -127,8 +133,8 @@ Field | Type | Optional | Description
 ----- | ---- | -------- | -----------
 id | integer | No | Unique ID
 name | string | No | Legal name
-slug | string | No | Unique name (generated)
 smooth_name | string | No | Smooth name (generated)
+slug | string | No | Unique name (generated)
 source_url | string | Yes | Main data source
 legal_form | string | Yes | Legal form
 staff | string | Yes | Estimation of the employees count range
@@ -157,6 +163,11 @@ geolocation | string | Yes | latitude, longitude
 country | string | Yes | Country
 quality | string | Yes | "headquarter" or "branch"
 revenue | string | Yes | Estimation of the revenue
+prefix | string | Yes | Prefix of the contact
+first_name | string | Yes | First name of the contact
+last_name | string | Yes | Last name of the contact
+phone | string | Yes | Phone number of the contact
+email | string | Yes | Email address of the contact
 headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
 branch_ids | array | No | Array of the unique IDs of the branches if the company is a headquarter, or the other branches if the company is a branch
 financial_years | array | Yes | Items of kind `Financial year`
