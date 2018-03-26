@@ -1,4 +1,4 @@
-API documentation for [Companydata.co](https://companydata.co). The documentation can be seen here: [API documention](sebastiencarceles.github.io/companydata-api-docs).
+API documentation for [Companydata.co](https://companydata.co). The documentation can be seen here: [API documention](https://sebastiencarceles.github.io/companydata-api-docs).
 
 This project is open so you can use it for yourself if you want to.
 
