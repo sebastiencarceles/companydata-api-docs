@@ -14,24 +14,21 @@ The `FullCompany` also comes with items of kind `FinancialYear`, giving more det
 
 ```json
 {
-  "id": 3690840,
-  "name": "SARL MOLLAT",
-  "slug":"sarl-mollat",
-  "legal_form": "Société à responsabilité limitée (sans autre indication)",
-  "staff": "9-10 employees",
-  "specialities": "Company specialities",
-  "presentation": "Company short presentation",
-  "logo_url": "http://logo.if/any.png",
-  "activity": "Location de logements",
-  "address": "45 Rue d'Empradel, 15700 PLEAUX",
-  "founded_at": "2001-05-07",
-  "country": "France",
-  "quality": "headquarter",
-  "smooth_name": "Sarl Mollat",
-  "headquarter_id": 1776745,
-  "branch_ids": [
-      1776747
-  ]
+    "id": 1689102,
+    "name": "ANALYSE IMAGE INTELLI ARTIFIC",
+    "slug": "analyse-image-intelli-artific",
+    "legal_form": "SAS, société par actions simplifiée",
+    "staff": "20 à 49 salariés",
+    "presentation": "Recherche, developpement systeme reconnaissance image par moyens informatiques",
+    "logo_url": "https://companydata.s3.eu-west-2.amazonaws.com/BkOJRrnBf.jpg%3Foh%3D25d02c0a7ebf0df13406460cd37683a3%26oe%3D5B247D36",
+    "activity": "Activités de pré-presse",
+    "address": "ANALYSE IMAGE INTELLI ARTIFIC, 37 AU 39, 37 RUE DE LA BIENFAISANCE, 75008 PARIS 8",
+    "founded_at": "1991-08-01",
+    "country": "France",
+    "quality": "headquarter",
+    "smooth_name": "Analyse Image Intelli Artific",
+    "headquarter_id": 1745669,
+    "branch_ids": [123456789],
 }
 ```
 
@@ -62,66 +59,86 @@ branch_ids | array | No | Array containing the unique IDs of the branches if th
 
 ```json
 {
-    "id": 3690840,
-    "name": "SARL MOLLAT",
-    "smooth_name": "Sarl Mollat",
-    "slug": "sarl-mollat",
-    "legal_form": "Société à responsabilité limitée (sans autre indication)",
-    "staff": "0 salarié",
-    "presentation": "Mise à disposition d'appartements, de maisons ou d'emplacements pour caravanes vides ou meublés destinés à l'habitation principale ou secondaire.",
-    "logo_url": null,
-    "activity": "Location de logements",
-    "address": "SARL MOLLAT, RUE D EMPRADEL, 15700 PLEAUX",
-    "founded_at": "2001-05-07",
+    "id": 1689102,
+    "name": "ANALYSE IMAGE INTELLI ARTIFIC",
+    "slug": "analyse-image-intelli-artific",
+    "legal_form": "SAS, société par actions simplifiée",
+    "staff": "20 à 49 salariés",
+    "presentation": "Recherche, developpement systeme reconnaissance image par moyens informatiques",
+    "logo_url": "https://companydata.s3.eu-west-2.amazonaws.com/BkOJRrnBf.jpg%3Foh%3D25d02c0a7ebf0df13406460cd37683a3%26oe%3D5B247D36",
+    "activity": "Activités de pré-presse",
+    "address": "ANALYSE IMAGE INTELLI ARTIFIC, 37 AU 39, 37 RUE DE LA BIENFAISANCE, 75008 PARIS 8",
+    "founded_at": "1991-08-01",
     "country": "France",
     "quality": "headquarter",
-    "revenue": "58758",
+    "smooth_name": "Analyse Image Intelli Artific",
+    "headquarter_id": 1745669,
+    "branch_ids": [123456789],
     "source_url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret",
-    "registration_1": "438036931",
-    "registration_2": "00014",
-    "activity_code": "6820A",
-    "address_line_1": "SARL MOLLAT",
+    "registration_1": "382789154",
+    "registration_2": "00053",
+    "activity_code": "1813Z",
+    "address_line_1": "ANALYSE IMAGE INTELLI ARTIFIC",
     "address_line_2": "",
-    "address_line_3": "",
-    "address_line_4": "RUE D EMPRADEL",
+    "address_line_3": "37 AU 39",
+    "address_line_4": "37 RUE DE LA BIENFAISANCE",
     "address_line_5": "",
     "cedex": "",
-    "zipcode": "15700",
-    "city": "PLEAUX",
-    "department_code": "15",
-    "department": "Cantal",
-    "region": "Auvergne-Rhône-Alpes",
-    "geolocation": "45.131704,2.220223",
-    "vat_number": "FR58828022055",
-    "prefix": "Monsieur",
-    "first_name": "ALAIN",
-    "last_name": "THIERRY",
-    "email": "athierry@mollat.eu",
-    "phone": "02 03 22 33 12",
-    "headquarter_id": 1776745,
-    "branch_ids": [
-        1776747
-    ],
+    "zipcode": "75008",
+    "city": "PARIS 8",
+    "department_code": "75",
+    "department": "Paris",
+    "region": "Île-de-France",
+    "geolocation": "48.876498,2.314889",
+    "revenue": "8308219",
+    "vat_number": "FR91382789154",
+    "prefix": "Mr",
+    "first_name": "Alain",
+    "last_name": "Thierry",
+    "email": "marketing@a2ia.com",
+    "phone": "+33 1 44 42 00 80",
+    "website": "https://www.a2ia.com",
+    "facebook": "https://facebook.com/A2iASoftware",
+    "linkedin": "http://www.linkedin.com/company/a2ia",
+    "twitter": "https://www.twitter.com/a2ia",
+    "crunchbase": "https://crunchbase.com/organization/a2ia",
     "financial_years": [
         {
             "year": "2016",
             "currency": "€",
-            "revenue": null,
-            "income": null,
-            "staff": null,
+            "revenue": 8308219,
+            "income": 2096451,
+            "staff": 51,
             "duration": 12,
             "closing_date": "2016-12-31"
         },
         {
             "year": "2015",
             "currency": "€",
-            "revenue": 58758,
-            "income": 56820,
-            "staff": 0,
+            "revenue": 8812526,
+            "income": 3043311,
+            "staff": 50,
             "duration": 12,
             "closing_date": "2015-12-31"
         },
-        # Eventually more financial years here
+        {
+            "year": "2014",
+            "currency": "€",
+            "revenue": 6873829,
+            "income": 1468080,
+            "staff": null,
+            "duration": 12,
+            "closing_date": "2014-12-31"
+        },
+        {
+            "year": "2013",
+            "currency": "€",
+            "revenue": 5848519,
+            "income": 1525080,
+            "staff": null,
+            "duration": 12,
+            "closing_date": "2013-12-31"
+        }
     ]
 }
 
@@ -170,6 +187,11 @@ phone | string | Yes | Phone number of the contact
 email | string | Yes | Email address of the contact
 headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
 branch_ids | array | No | Array of the unique IDs of the branches if the company is a headquarter, or the other branches if the company is a branch
+website | string | Yes | Main website URL
+facebook | string | Yes | Facebook page
+twitter | string | Yes | Twitter page
+linkedin | string | Yes | LinkedIn page
+crunchbase | string | Yes | Crunchbase page
 financial_years | array | Yes | Items of kind `Financial year`
 
 A `Financial year` represents a year (more or less) of activity for a `Company`. It has the following fields:
@@ -190,13 +212,13 @@ closing_date | string | No | Closing date
 
 ```json
 {
-  "id":3690840,
-  "smooth_name":"Sarl Mollat",
-  "name":"SARL MOLLAT",
-  "city":"PLEAUX",
-  "country":"France",
-  "website_url":"https://www.companydata.co/companies/sarl-mollat",
-  "api_url":"https://www.companydata.co/api/v1/companies/sarl-mollat"
+    "id": 3690840,
+    "smooth_name": "Sarl Mollat",
+    "name": "SARL MOLLAT",
+    "city": "PLEAUX",
+    "country": "France",
+    "website_url": "https://www.companydata.co/companies/sarl-mollat",
+    "api_url": "https://www.companydata.co/api/v1/companies/sarl-mollat"
 }
 ```
 
