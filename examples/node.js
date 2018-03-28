@@ -2,9 +2,7 @@ const request = require("request"); // npm install request
 
 // Companies
 
-var username = 'your_api_key',
-    password = '',
-    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5';
+var url = 'https://your_api_key:@www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5';
 
 request({url: url}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
@@ -23,9 +21,7 @@ request({url: url}, function (error, response, body) {
 
 // Company
 
-var username = 'your_api_key',
-    password = '',
-    url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/sarl-mollat';
+var url = 'https://your_api_key:@www.companydata.co/api/v1/companies/sarl-mollat';
 
 request({url: url}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
