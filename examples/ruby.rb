@@ -7,7 +7,7 @@ require "json"
 uri = URI.parse("https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
-request.basic_auth("your.domain@doamin.com", "your_api_key")
+request.basic_auth("your_api_key", "")
 http.use_ssl = true
 response = http.request(request)
 
@@ -29,7 +29,7 @@ puts response["X-Pagination-Out-Of-Range"]
 uri = URI.parse("https://www.companydata.co/api/v1/companies/sarl-mollat")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
-request.basic_auth("your.domain@doamin.com", "your_api_key")
+request.basic_auth("your_api_key", "")
 http.use_ssl = true
 response = http.request(request)
 
