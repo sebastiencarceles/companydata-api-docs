@@ -301,34 +301,32 @@
 <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"any_endpoint_here"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your_api_key"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'any_endpoint_here'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'any_endpoint_here'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl -u your.email@domain.com:your_api_key <span class="s2">"any_endpoint_here"</span>
+curl -u your_api_key: <span class="s2">"any_endpoint_here"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span> <span class="c1">// npm install request</span>
 
-<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'your.email@domain.com'</span><span class="p">,</span>
-    <span class="nx">password</span> <span class="o">=</span> <span class="s1">'your_api_key'</span><span class="p">,</span>
-    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://'</span> <span class="o">+</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">':'</span> <span class="o">+</span> <span class="nx">password</span> <span class="o">+</span> <span class="s1">'@any_endpoint_here'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@any_endpoint_here'</span><span class="p">;</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>your.email@domain.com</code> with the email you used to register and <code>your_api_key</code> with your API key.</p>
+<p>Make sure to replace <code>your_api_key</code> with your API key.</p>
 </blockquote>
 
 <p>Companydata.co API uses an API key to allow access to the API. You will find your API key on your <a href="https://www.companydata.co/users/edit">account page</a>, once registered.</p>
 
-<p>This is a basic authentication, so Companydata.co API expects for your email and the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>This is a basic authentication, so Companydata.co API expects for your API key to be included in all API requests to the server in a header that looks like the following:</p>
 
 <p><code>Authorization: Basic GdtYWlsLmNvbTo4SHA5dk44MWZrOXFuaURGWU=</code></p>
 
-<p>Where <code>GdtYWlsLmNvbTo4SHA5dk44MWZrOXFuaURGWU=</code> is the string <code>&quot;your.email@domain.com:your_api_key&quot;</code> encoded in base 64.</p>
+<p>Where <code>GdtYWlsLmNvbTo4SHA5dk44MWZrOXFuaURGWU=</code> is the string <code>&quot;your_api_key:&quot;</code> encoded in base 64.</p>
 
 <aside class="notice">
-You must replace <code>your.email@domain.com</code> with the email you used to register and <code>your_api_key</code> with your personal API key.
+You must replace <code>your_api_key</code> with your personal API key.
 </aside>
 <h1 id='pagination'>Pagination</h1>
 <p>For endpoints that use pagination, you can use the parameter <code>page</code> to get a given page (the first page is 1, not 0). Default is <code>1</code>.</p>
@@ -356,7 +354,7 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your_api_key"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
@@ -374,7 +372,7 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 <span class="nb">puts</span> <span class="n">response</span><span class="p">[</span><span class="s2">"X-Pagination-Out-Of-Range"</span><span class="p">]</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies?q=company&amp;page=2&amp;per_page=5'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies?q=company&amp;page=2&amp;per_page=5'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
 
@@ -387,12 +385,10 @@ You must replace <code>your.email@domain.com</code> with the email you used to r
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-First-Page'</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Last-Page'</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'X-Pagination-Out-Of-Range'</span><span class="p">])</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -u your_api_key: <span class="s2">"https://www.companydata.co/api/v1/companies?q=company"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span> <span class="c1">// npm install request</span>
 
-<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'your.email@domain.com'</span><span class="p">,</span>
-    <span class="nx">password</span> <span class="o">=</span> <span class="s1">'your_api_key'</span><span class="p">,</span>
-    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://'</span> <span class="o">+</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">':'</span> <span class="o">+</span> <span class="nx">password</span> <span class="o">+</span> <span class="s1">'@www.companydata.co/api/v1/companies?q=company&amp;page=2&amp;per_page=5'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@www.companydata.co/api/v1/companies?q=company&amp;page=2&amp;per_page=5'</span><span class="p">;</span>
 
 <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
@@ -462,7 +458,7 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your_api_key"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
@@ -470,14 +466,12 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 <span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed result: hash</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/identifier'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/identifier'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -u your_api_key: <span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'your.email@domain.com'</span><span class="p">,</span>
-    <span class="nx">password</span> <span class="o">=</span> <span class="s1">'your_api_key'</span><span class="p">,</span>
-    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://'</span> <span class="o">+</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">':'</span> <span class="o">+</span> <span class="nx">password</span> <span class="o">+</span> <span class="s1">'@www.companydata.co/api/v1/companies/identifier'</span><span class="p">;</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@www.companydata.co/api/v1/companies/identifier'</span><span class="p">;</span>
 
 <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
@@ -521,7 +515,7 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
-<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your.email@domain.com"</span><span class="p">,</span> <span class="s2">"your_api_key"</span><span class="p">)</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your_api_key"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
@@ -529,14 +523,12 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 <span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span> <span class="c1"># parsed result: hash</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your.email@domain.com'</span><span class="p">,</span> <span class="s">'your_api_key'</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -u your.email@domain.com:your_api_key <span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -u your_api_key: <span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'your.email@domain.com'</span><span class="p">,</span>
-    <span class="nx">password</span> <span class="o">=</span> <span class="s1">'your_api_key'</span><span class="p">,</span>
-    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://'</span> <span class="o">+</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">':'</span> <span class="o">+</span> <span class="nx">password</span> <span class="o">+</span> <span class="s1">'@www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">;</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">;</span>
 
 <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
