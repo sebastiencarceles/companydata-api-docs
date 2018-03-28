@@ -2,8 +2,8 @@ const request = require("request"); // npm install request
 
 // Companies
 
-var username = 'your.email@domain.com',
-    password = 'your_api_key',
+var username = 'your_api_key',
+    password = '',
     url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5';
 
 request({url: url}, function (error, response, body) {
@@ -23,8 +23,8 @@ request({url: url}, function (error, response, body) {
 
 // Company
 
-var username = 'your.email@domain.com',
-    password = 'your_api_key',
+var username = 'your_api_key',
+    password = '',
     url = 'https://' + username + ':' + password + '@www.companydata.co/api/v1/companies/sarl-mollat';
 
 request({url: url}, function (error, response, body) {
