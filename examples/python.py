@@ -2,7 +2,7 @@ import requests # with Python3
 
 # Companies
 
-response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your.email@domain.com', 'your_api_key'))
+response = requests.get('https://www.companydata.co/api/v1/companies?q=mollat&page=2&per_page=5', auth=('your_api_key', ''))
 print(response.status_code) # should be 200
 print(response.json()) # parsed results: array of hash
 
@@ -18,7 +18,7 @@ print(response.headers['X-Pagination-Out-Of-Range'])
 
 # Company
 
-response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your.email@domain.com', 'your_api_key'))
+response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your_api_key', ''))
 print(response.status_code) # should be 200
 print(response.json()) # parsed results: array of hash
 
