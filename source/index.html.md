@@ -247,9 +247,9 @@ Parameter | Optional | Description
 --------- | -------- | -----------
 IDENTIFIER | No | The ID of the company to retreive. It can be an integer `id`, a `slug`, a `registration number` (like the SIREN in France) or a `vat number`.
 
-The `id`, the `slug` and `vat number`, are unique, so there is no doubt on the company you receive in return.
+The `id` and the `slug` are unique, so there is no doubt on the company you receive in return.
 
-If you prefer to use a `registration number` (like the SIREN in France), as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.
+If you prefer to use a `registration number` (like the SIREN in France) or a `VAT number`, as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.
 
 ### Response
 
