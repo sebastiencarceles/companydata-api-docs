@@ -503,9 +503,9 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 </tr>
 </tbody></table>
 
-<p>The <code>id</code>, the <code>slug</code> and <code>vat number</code>, are unique, so there is no doubt on the company you receive in return.</p>
+<p>The <code>id</code> and the <code>slug</code> are unique, so there is no doubt on the company you receive in return.</p>
 
-<p>If you prefer to use a <code>registration number</code> (like the SIREN in France), as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.</p>
+<p>If you prefer to use a <code>registration number</code> (like the SIREN in France) or a <code>VAT number</code>, as this number can be shared between the headquarter and the branches of the company, you receive the headquarter in return. If the headquarter does not exist, you receive a random branch. If you want to get a company by registration numbers 1 and 2 (like SIREN and NIC in France), please see below.</p>
 <h3 id='response-2'>Response</h3>
 <p>An item of kind <a href="#fullcompany">FullCompany</a>.</p>
 <h2 id='get-a-company-by-registration-numbers'>Get a company by registration numbers</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
