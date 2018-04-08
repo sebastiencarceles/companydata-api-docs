@@ -93,8 +93,6 @@ branch_ids | array | No | Array containing the unique IDs of the branches if th
     "revenue": "8308219",
     "vat_number": "FR91382789154",
     "prefix": "Mr",
-    "first_name": "Alain",
-    "last_name": "Thierry",
     "email": "marketing@a2ia.com",
     "phone": "+33 1 44 42 00 80",
     "website": "https://www.a2ia.com",
@@ -181,8 +179,6 @@ country | string | Yes | Country
 quality | string | Yes | "headquarter" or "branch"
 revenue | string | Yes | Estimation of the revenue
 prefix | string | Yes | Prefix of the contact
-first_name | string | Yes | First name of the contact
-last_name | string | Yes | Last name of the contact
 phone | string | Yes | Phone number of the contact
 email | string | Yes | Email address of the contact
 headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
