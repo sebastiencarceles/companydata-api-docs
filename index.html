@@ -410,7 +410,7 @@ You must replace <code>your_api_key</code> with your personal API key.
 You will receive an array of hash, each hash representing a <code>Company</code>.</p>
 </blockquote>
 
-<p>This endpoint retrieves companies.</p>
+<p>This endpoint retrieves companies, searching by a given query, filters or both.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET https://www.companydata.co/api/v1/companies?q=&lt;COMPANY_NAME&gt;</code></p>
 
@@ -427,7 +427,7 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 <tr>
 <td>q</td>
 <td>none</td>
-<td>No</td>
+<td>Yes</td>
 <td>The search term</td>
 </tr>
 <tr>
@@ -435,6 +435,30 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 <td>headquarter</td>
 <td> Yes</td>
 <td>The quality of the searched companies ; it can be <code>headquarter</code> (default), <code>branch</code> or <code>all</code></td>
+</tr>
+<tr>
+<td>activity_code</td>
+<td>none</td>
+<td>Yes</td>
+<td>The activity code to filter on (case sensitive)</td>
+</tr>
+<tr>
+<td>city</td>
+<td>none</td>
+<td>Yes</td>
+<td>The city to filter on (case sensitive)</td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td>none</td>
+<td>Yes</td>
+<td>The zipcode to filter on (case sensitive)</td>
+</tr>
+<tr>
+<td>country</td>
+<td>none</td>
+<td>Yes</td>
+<td>The country to filter on (case sensitive)</td>
 </tr>
 <tr>
 <td>page</td>
