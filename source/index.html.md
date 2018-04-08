@@ -169,7 +169,7 @@ request({url: url}, function (error, response, body) {
 > Replace `company` by any company name or partial company name you would like to search for.
 > You will receive an array of hash, each hash representing a `Company`.
 
-This endpoint retrieves companies.
+This endpoint retrieves companies, searching by a given query, filters or both.
 
 ### HTTP Request
 
@@ -181,8 +181,12 @@ This endpoint is paginated and requires authentication.
 
 Parameter | Default | Optional | Description
 --------- | ------- | -------- | -----------
-q | none | No | The search term
+q | none | Yes | The search term
 quality | headquarter | Yes | The quality of the searched companies ; it can be `headquarter` (default), `branch` or `all`
+activity_code | none | Yes | The activity code to filter on (case sensitive)
+city | none | Yes | The city to filter on (case sensitive)
+zipcode | none | Yes | The zipcode to filter on (case sensitive)
+country | none | Yes | The country to filter on (case sensitive)
 page | 1 | Yes | The wanted page
 per_page | 10 | Yes | The items count per page
 
