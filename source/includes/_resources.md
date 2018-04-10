@@ -70,6 +70,7 @@ branch_ids | array | No | Array containing the unique IDs of the branches if th
     "address": "ANALYSE IMAGE INTELLI ARTIFIC, 37 AU 39, 37 RUE DE LA BIENFAISANCE, 75008 PARIS 8",
     "founded_at": "1991-08-01",
     "country": "France",
+    "country_code": "FR",
     "quality": "headquarter",
     "smooth_name": "Analyse Image Intelli Artific",
     "headquarter_id": 1745669,
@@ -176,6 +177,7 @@ region | string | Yes | Region
 founded_at | string | Yes | Date of creation
 geolocation | string | Yes | latitude, longitude
 country | string | Yes | Country
+country_code | string | Yes | Country code (ISO Alpha 2)
 quality | string | Yes | "headquarter" or "branch"
 revenue | string | Yes | Estimation of the revenue
 prefix | string | Yes | Prefix of the contact
