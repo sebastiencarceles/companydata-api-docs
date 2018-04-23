@@ -217,7 +217,7 @@ import requests # with Python3
 
 response = requests.get('https://www.companydata.co/api/v1/companies/identifier', auth=('your_api_key', ''))
 print(response.status_code) # should be 200
-print(response.json()) # parsed results: array of hash
+print(response.json()) # parsed results: hash
 ```
 
 ```shell
@@ -282,7 +282,7 @@ import requests # with Python3
 
 response = requests.get('https://www.companydata.co/api/v1/companies/registration_1/registration_2', auth=('your_api_key', ''))
 print(response.status_code) # should be 200
-print(response.json()) # parsed results: array of hash
+print(response.json()) # parsed results: hash
 ```
 
 ```shell
@@ -355,7 +355,7 @@ const request = require("request"); // npm install request
 
 request({url: 'https://www.companydata.co/api/v1/companies/autocomplete?q=company'}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
-  console.log(JSON.parse(body)); // parsed results: hash
+  console.log(JSON.parse(body)); // parsed results: array of hash
 });
 ```
 
