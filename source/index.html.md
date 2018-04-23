@@ -2,10 +2,11 @@
 title: Companydata.co - API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
+  - shell: cURL
   - ruby
   - python
   - javascript
+  - php
 
 toc_footers:
   - <a href='https://www.companydata.co/' target='_blank'>Sign up for a developer key</a>
@@ -24,7 +25,7 @@ search: true
 
 The following documentation shows how to use the API to enrich your system with company data.
 
-We have language bindings in Shell (with `cURL`), Ruby and Python3 and Javascript (with Node.js)! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell (with `cURL`), Ruby, Python3, Javascript (with Node.js) and PHP! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
@@ -35,7 +36,7 @@ require "net/http"
 require "uri"
 require "json"
 
-uri = URI.parse("any_endpoint_here")
+uri = URI.parse("https://any_endpoint_here")
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Get.new(uri.request_uri)
 request.basic_auth("your_api_key", "")
@@ -46,18 +47,25 @@ response = http.request(request)
 ```python
 import requests # with Python3
 
-response = requests.get('any_endpoint_here', auth=('your_api_key', ''))
+response = requests.get('https://any_endpoint_here', auth=('your_api_key', ''))
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl -u your_api_key: "any_endpoint_here"
+curl -u your_api_key: "https://any_endpoint_here"
 ```
 
 ```javascript
 const request = require("request"); // npm install request
 
 var url = 'https://your_api_key:@any_endpoint_here';
+```
+
+```php
+<?php
+$ch = curl_init('https://any_endpoint_here');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+?>
 ```
 
 > Make sure to replace `your_api_key` with your API key.
@@ -166,6 +174,41 @@ request({url: url}, function (error, response, body) {
 });
 ```
 
+```php
+<?php
+$ch = curl_init('https://www.companydata.co/api/v1/companies?q=company&page=2&per_page=5');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HEADER, true);
+
+$response = curl_exec($ch);
+$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+curl_close($ch);
+
+$headers = substr($response, 0, $header_size);
+$body = substr($response, $header_size);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+print($http_status . "\n"); // should be 200
+print_r(json_decode($body)); // parsed results: array of hash
+
+// Pagination info:
+foreach (explode("\r\n", $headers) as $hdr) {
+  print($hdr . "\n");
+  /* Prints all the headers, including:
+  * X-Pagination-Limit-Value
+  * X-Pagination-Total-Pages
+  * X-Pagination-Current-Page
+  * X-Pagination-Next-Page
+  * X-Pagination-Prev-Page
+  * X-Pagination-First-Page
+  * X-Pagination-Last-Page
+  * X-Pagination-Out-Of-Range
+  */
+}
+?>
+```
+
 > Replace `company` by any company name or partial company name you would like to search for.
 > You will receive an array of hash, each hash representing a `Company`.
 
@@ -234,6 +277,21 @@ request({url: url}, function (error, response, body) {
 });
 ```
 
+```php
+<?php
+$ch = curl_init('https://www.companydata.co/api/v1/companies/identifier');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+print($http_status . "\n"); // should be 200
+print_r(json_decode($response)); // parsed results: hash
+?>
+```
+
 > Replace `identifier` with any known identifier.
 > You will receive a hash representing a `FullCompany`.
 
@@ -299,6 +357,21 @@ request({url: url}, function (error, response, body) {
 });
 ```
 
+```php
+<?php
+$ch = curl_init('https://www.companydata.co/api/v1/companies/registration_1/registration_2');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+print($http_status . "\n"); // should be 200
+print_r(json_decode($response)); // parsed results: hash
+?>
+```
+
 > Replace `registration_1` and `registration_2` with the known registration numbers of any company. In France, `registration_1` is the SIREN and `registration_2` is the NIC.
 > You will receive a hash representing a `FullCompany`.
 
@@ -357,6 +430,21 @@ request({url: 'https://www.companydata.co/api/v1/companies/autocomplete?q=compan
   console.log(response.statusCode); // should be 200
   console.log(JSON.parse(body)); // parsed results: array of hash
 });
+```
+
+```php
+<?php
+$ch = curl_init('https://www.companydata.co/api/v1/companies/autocomplete?q=company');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+print($http_status . "\n"); // should be 200
+print_r(json_decode($response)); // parsed results: array of hash
+?>
 ```
 
 > Replace `company` by any company name or partial company name you would like to search for.
