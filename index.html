@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,11 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="shell">cURL</a>
               <a href="#" data-language-name="ruby">ruby</a>
               <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="php">php</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -289,7 +290,7 @@
 
 <p>The following documentation shows how to use the API to enrich your system with company data.</p>
 
-<p>We have language bindings in Shell (with <code>cURL</code>), Ruby and Python3 and Javascript (with Node.js)! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have language bindings in Shell (with <code>cURL</code>), Ruby, Python3, Javascript (with Node.js) and PHP! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
@@ -298,7 +299,7 @@
 <span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"json"</span>
 
-<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"any_endpoint_here"</span><span class="p">)</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"https://any_endpoint_here"</span><span class="p">)</span>
 <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
 <span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">request_uri</span><span class="p">)</span>
 <span class="n">request</span><span class="p">.</span><span class="nf">basic_auth</span><span class="p">(</span><span class="s2">"your_api_key"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
@@ -306,12 +307,16 @@
 <span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># with Python3</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'any_endpoint_here'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://any_endpoint_here'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 </code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl -u your_api_key: <span class="s2">"any_endpoint_here"</span>
+curl -u your_api_key: <span class="s2">"https://any_endpoint_here"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span> <span class="c1">// npm install request</span>
 
 <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@any_endpoint_here'</span><span class="p">;</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">(</span><span class="s1">'https://any_endpoint_here'</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_USERPWD</span><span class="p">,</span> <span class="s2">"your_api_key:"</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>your_api_key</code> with your API key.</p>
@@ -404,6 +409,38 @@ You must replace <code>your_api_key</code> with your personal API key.
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">'x-pagination-last-page'</span><span class="p">]);</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s1">'x-pagination-out-of-range'</span><span class="p">]);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">(</span><span class="s1">'https://www.companydata.co/api/v1/companies?q=company&amp;page=2&amp;per_page=5'</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_USERPWD</span><span class="p">,</span> <span class="s2">"your_api_key:"</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_HEADER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+<span class="nv">$header_size</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HEADER_SIZE</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+
+<span class="nv">$headers</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$header_size</span><span class="p">);</span>
+<span class="nv">$body</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="nv">$header_size</span><span class="p">);</span>
+<span class="nv">$http_status</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HTTP_CODE</span><span class="p">);</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nv">$http_status</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span> <span class="c1">// should be 200
+</span><span class="nb">print_r</span><span class="p">(</span><span class="nb">json_decode</span><span class="p">(</span><span class="nv">$body</span><span class="p">));</span> <span class="c1">// parsed results: array of hash
+</span>
+<span class="c1">// Pagination info:
+</span><span class="k">foreach</span> <span class="p">(</span><span class="nb">explode</span><span class="p">(</span><span class="s2">"</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$hdr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">print</span><span class="p">(</span><span class="nv">$hdr</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+  <span class="cm">/* Prints all the headers, including:
+  * X-Pagination-Limit-Value
+  * X-Pagination-Total-Pages
+  * X-Pagination-Current-Page
+  * X-Pagination-Next-Page
+  * X-Pagination-Prev-Page
+  * X-Pagination-First-Page
+  * X-Pagination-Last-Page
+  * X-Pagination-Out-Of-Range
+  */</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>Replace <code>company</code> by any company name or partial company name you would like to search for.
@@ -492,7 +529,7 @@ You will receive an array of hash, each hash representing a <code>Company</code>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/identifier'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: hash</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your_api_key: <span class="s2">"https://www.companydata.co/api/v1/companies/identifier"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@www.companydata.co/api/v1/companies/identifier'</span><span class="p">;</span>
@@ -501,6 +538,18 @@ You will receive an array of hash, each hash representing a <code>Company</code>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span> <span class="c1">// parsed results: hash</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">(</span><span class="s1">'https://www.companydata.co/api/v1/companies/identifier'</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_USERPWD</span><span class="p">,</span> <span class="s2">"your_api_key:"</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+<span class="nv">$http_status</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HTTP_CODE</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nv">$http_status</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span> <span class="c1">// should be 200
+</span><span class="nb">print_r</span><span class="p">(</span><span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="p">));</span> <span class="c1">// parsed results: hash
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>Replace <code>identifier</code> with any known identifier.
@@ -549,7 +598,7 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'your_api_key'</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span> <span class="c"># should be 200</span>
-<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: array of hash</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span> <span class="c"># parsed results: hash</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -u your_api_key: <span class="s2">"https://www.companydata.co/api/v1/companies/registration_1/registration_2"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'https://your_api_key:@www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">;</span>
@@ -558,6 +607,18 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span> <span class="c1">// parsed results: hash</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">(</span><span class="s1">'https://www.companydata.co/api/v1/companies/registration_1/registration_2'</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_USERPWD</span><span class="p">,</span> <span class="s2">"your_api_key:"</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+<span class="nv">$http_status</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HTTP_CODE</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nv">$http_status</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span> <span class="c1">// should be 200
+</span><span class="nb">print_r</span><span class="p">(</span><span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="p">));</span> <span class="c1">// parsed results: hash
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>Replace <code>registration_1</code> and <code>registration_2</code> with the known registration numbers of any company. In France, <code>registration_1</code> is the SIREN and <code>registration_2</code> is the NIC.
@@ -612,8 +673,20 @@ You will receive a hash representing a <code>FullCompany</code>.</p>
 
 <span class="nx">request</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="s1">'https://www.companydata.co/api/v1/companies/autocomplete?q=company'</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span> <span class="c1">// should be 200</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span> <span class="c1">// parsed results: hash</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">body</span><span class="p">));</span> <span class="c1">// parsed results: array of hash</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$ch</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">(</span><span class="s1">'https://www.companydata.co/api/v1/companies/autocomplete?q=company'</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_USERPWD</span><span class="p">,</span> <span class="s2">"your_api_key:"</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+<span class="nv">$http_status</span> <span class="o">=</span> <span class="nb">curl_getinfo</span><span class="p">(</span><span class="nv">$ch</span><span class="p">,</span> <span class="nx">CURLINFO_HTTP_CODE</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$ch</span><span class="p">);</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nv">$http_status</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span> <span class="c1">// should be 200
+</span><span class="nb">print_r</span><span class="p">(</span><span class="nb">json_decode</span><span class="p">(</span><span class="nv">$response</span><span class="p">));</span> <span class="c1">// parsed results: array of hash
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>Replace <code>company</code> by any company name or partial company name you would like to search for.
@@ -1306,10 +1379,11 @@ You will receive an array of hash, each hash representing a <code>LightCompany</
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="shell">cURL</a>
                 <a href="#" data-language-name="ruby">ruby</a>
                 <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
