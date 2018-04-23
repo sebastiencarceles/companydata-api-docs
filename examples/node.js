@@ -32,5 +32,5 @@ request({url: url}, function (error, response, body) {
 
 request({url: 'https://www.companydata.co/api/v1/companies/autocomplete?q=mollat'}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
-  console.log(JSON.parse(body)); // parsed results: hash
+  console.log(JSON.parse(body)); // parsed results: array of hash
 });

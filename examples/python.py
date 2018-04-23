@@ -20,7 +20,7 @@ print(response.headers['X-Pagination-Out-Of-Range'])
 
 response = requests.get('https://www.companydata.co/api/v1/companies/sarl-mollat', auth=('your_api_key', ''))
 print(response.status_code) # should be 200
-print(response.json()) # parsed results: array of hash
+print(response.json()) # parsed results: hash
 
 # Autocomplete
 
