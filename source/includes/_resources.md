@@ -25,6 +25,7 @@ The `FullCompany` also comes with items of kind `FinancialYear`, giving more det
     "address": "ANALYSE IMAGE INTELLI ARTIFIC, 37 AU 39, 37 RUE DE LA BIENFAISANCE, 75008 PARIS 8",
     "founded_at": "1991-08-01",
     "country": "France",
+    "country_code": "FR",
     "quality": "headquarter",
     "smooth_name": "Analyse Image Intelli Artific",
     "headquarter_id": 1745669,
@@ -49,6 +50,7 @@ activity | string | Yes | Activity
 address | string | Yes | Address (address components joined with a coma)
 founded_at | string | Yes | Date of creation
 country | string | Yes | Country
+country_code | string | Yes | Country code (ISO Alpha 2)
 quality | string | Yes | "headquarter" or "branch"
 headquarter_id | integer | Yes | Unique ID of the headquarter if the company is a branch, or null if it is already a headquarter
 branch_ids | array | No | Array containing the unique IDs of the branches if the company is a headquarter, or the other branches if the company is a branch

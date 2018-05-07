@@ -226,10 +226,11 @@ Parameter | Default | Optional | Description
 --------- | ------- | -------- | -----------
 q | none | Yes | The search term
 quality | headquarter | Yes | The quality of the searched companies ; it can be `headquarter` (default), `branch` or `all`
-activity_code | none | Yes | The activity code to filter on (case sensitive)
-city | none | Yes | The city to filter on (case sensitive)
-zipcode | none | Yes | The zipcode to filter on (case sensitive)
-country | none | Yes | The country to filter on (case sensitive)
+activity_code | none | Yes | The activity code to filter on
+city | none | Yes | The city to filter on
+zipcode | none | Yes | The zipcode to filter on
+country | none | Yes | The country to filter on
+country_code | none | Yes | The country code to filter on (ISO Alpha 2)
 page | 1 | Yes | The wanted page
 per_page | 10 | Yes | The items count per page
 
