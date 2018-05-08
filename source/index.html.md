@@ -395,6 +395,84 @@ REGISTRATION_2 | No | The second registration number of the company (the NIC in 
 
 An item of kind [FullCompany](#fullcompany).
 
+# VAT numbers
+
+## Validity check of a VAT number
+
+```ruby
+require "net/http"
+require "uri"
+require "json"
+
+uri = URI.parse("https://www.companydata.co/api/v1/vats/vat_number")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Get.new(uri.request_uri)
+request.basic_auth("your_api_key", "")
+http.use_ssl = true
+response = http.request(request)
+
+puts response.code # should be 200
+puts JSON.parse(response.body) # parsed result: hash
+```
+
+```python
+import requests # with Python3
+
+response = requests.get('https://www.companydata.co/api/v1/vats/vat_number', auth=('your_api_key', ''))
+print(response.status_code) # should be 200
+print(response.json()) # parsed results: hash
+```
+
+```shell
+curl -u your_api_key: "https://www.companydata.co/api/v1/vats/vat_number"
+
+```
+
+```javascript
+var url = 'https://your_api_key:@www.companydata.co/api/v1/vats/vat_number';
+
+request({url: url}, function (error, response, body) {
+  console.log(response.statusCode); // should be 200
+  console.log(JSON.parse(body)); // parsed results: hash
+});
+```
+
+```php
+<?php
+$ch = curl_init('https://www.companydata.co/api/v1/vats/vat_number');
+curl_setopt($ch, CURLOPT_USERPWD, "your_api_key:");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+print($http_status . "\n"); // should be 200
+print_r(json_decode($response)); // parsed results: hash
+?>
+```
+
+> Replace `vat_number` with the VAT number you want to check, for example "FR12345678".
+> You will receive a hash representing a `Vat`.
+
+This endpoint checks the validity of a VAT number. The number is validated or invalidated by the European Commission.
+
+### HTTP Request
+
+`GET https://www.companydata.co/api/v1/vats/<VAT_NUMBER>`
+
+This endpoint requires authentication.
+
+### URL Parameters
+
+Parameter | Optional | Description
+--------- | -------- | -----------
+VAT_NUMBER | No | The VAT number to check (for example "FR123456789")
+
+### Response
+
+An item of kind [Vat](#vat). A VAT number can be `valid` or `invalid`.
+
 # Autocomplete
 
 ```ruby

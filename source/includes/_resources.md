@@ -206,6 +206,47 @@ staff | integer | No | Staff
 duration | integer | No | Duration in months
 closing_date | string | No | Closing date
 
+## Vat
+
+> A VAT number is serialized like this:
+
+```json
+{
+    "value": "BE0404056765",
+    "country_code": "BE",
+    "status": "valid",
+    "validated_at": "2018-05-08T12:45:31.158Z",
+    "company": {
+        "id": 12247335,
+        "name": "Bouwmaterialen L. Van Den Broeck",
+        "slug": "bouwmaterialen-l-van-den-broeck",
+        "legal_form": "Société anonyme",
+        "staff": null,
+        "presentation": null,
+        "logo_url": null,
+        "activity": "Commerce de gros de matériaux de construction, assortiment général",
+        "address": "128, Berlaarsesteenweg, 2500 Lier",
+        "founded_at": "1955-02-23",
+        "country": "Belgium",
+        "country_code": "BE",
+        "quality": "headquarter",
+        "smooth_name": "Bouwmaterialen L. Van Den Broeck",
+        "headquarter_id": null,
+        "branch_ids": []
+    }
+}
+```
+
+A `Vat` has the following fields:
+
+Field | Type | Optional | Description
+----- | ---- | -------- | -----------
+value | string | No | Value of the VAT number
+country_code | string | No | Country code
+status | string | No | Actual status, can be `valid` or `invalid`
+validated_at | string | No | Date of validation with the European Commission service
+company | Item of type [Company](#company) | No | The company that owns the VAT number
+
 ## LightCompany
 
 > A light company is serialized like this:
