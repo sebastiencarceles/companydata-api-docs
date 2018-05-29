@@ -1,3 +1,5 @@
+// ----------- WITH REQUEST ----------- //
+
 const request = require("request"); // npm install request
 
 // Companies
@@ -33,4 +35,21 @@ request({url: url}, function (error, response, body) {
 request({url: 'https://www.companydata.co/api/v1/companies/autocomplete?q=mollat'}, function (error, response, body) {
   console.log(response.statusCode); // should be 200
   console.log(JSON.parse(body)); // parsed results: array of hash
+});
+
+
+// ----------- WITH AXIOS ----------- //
+
+const axios = require("axios"); // npm install axios
+
+axios.get("https://www.companydata.co/api/v1/vats/FR58828022053", {
+  auth: {
+    username: "your_api_key",
+    password: ""
+  }
+}).then(function (response) {
+  console.log(response);
+})
+.catch(function (error) {
+  console.log(error);
 });
