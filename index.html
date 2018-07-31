@@ -232,6 +232,9 @@
             <a href="#pagination" class="toc-h1 toc-link" data-title="pagination">Pagination</a>
           </li>
           <li>
+            <a href="#sandbox" class="toc-h1 toc-link" data-title="sandbox">Sandbox</a>
+          </li>
+          <li>
             <a href="#companies" class="toc-h1 toc-link" data-title="companies">Companies</a>
               <ul class="toc-list-h2">
                   <li>
@@ -363,6 +366,14 @@ You must replace <code>your_api_key</code> with your personal API key.
 <li><code>X-Pagination-Last-Page</code>: <code>true</code> when it is the last page, <code>false</code> otherwise</li>
 <li><code>X-Pagination-Out-Of-Range</code>: <code>true</code> when the requested page is out of range, <code>false</code> otherwise</li>
 </ul>
+<h1 id='sandbox'>Sandbox</h1>
+<p>If you wish to use Companydata.co without beeing billed, you can use the sandbox mode. Passing the <code>X-Sandbox</code> header to any request, with any value, the call is not charged.</p>
+
+<p>In return you receive random yet plausible data, letting you build your software in a realistic way.</p>
+
+<aside class="notice">
+Please note that after creating your account, you have a free trial membership. So you may not need the sandbox mode.
+</aside>
 <h1 id='companies'>Companies</h1><h2 id='search-for-companies'>Search for companies</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"net/http"</span>
 <span class="nb">require</span> <span class="s2">"uri"</span>
 <span class="nb">require</span> <span class="s2">"json"</span>
