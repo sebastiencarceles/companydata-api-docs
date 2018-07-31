@@ -101,6 +101,16 @@ Pagination infos are returned in the response headers:
 * `X-Pagination-Last-Page`: `true` when it is the last page, `false` otherwise
 * `X-Pagination-Out-Of-Range`: `true` when the requested page is out of range, `false` otherwise
 
+# Sandbox
+
+If you wish to use Companydata.co without beeing billed, you can use the sandbox mode. Passing the `X-Sandbox` header to any request, with any value, the call is not charged.
+
+In return you receive random yet plausible data, letting you build your software in a realistic way.
+
+<aside class="notice">
+Please note that after creating your account, you have a free trial membership. So you may not need the sandbox mode.
+</aside>
+
 # Companies
 
 ## Search for companies
