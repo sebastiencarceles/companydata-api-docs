@@ -241,6 +241,8 @@ city | none | Yes | The city to filter on
 zipcode | none | Yes | The zipcode to filter on
 country | none | Yes | The country to filter on
 country_code | none | Yes | The country code to filter on (ISO Alpha 2)
+founded_from | none | Yes | The minimum foundation date of the expected results, included (format is "YYYY-MM-DD")
+founded_until | none | Yes | The maximum foundation date of the expected results, included (format is "YYYY-MM-DD")
 page | 1 | Yes | The wanted page
 per_page | 10 | Yes | The items count per page
 
